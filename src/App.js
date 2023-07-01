@@ -1,19 +1,17 @@
-import './App.css'
-import EditTask from './EditTask'
-import Task from './Task'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from "./components/Home";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App () {
+function App() {
   return (
     <BrowserRouter>
-      <div className='app m-5'>
+      <div className="app mt-5">
         <Routes>
-          <Route path='/' element={<Task />} exact={true} />
-          <Route path='/editTask' element={<EditTask />} exact={true} />
+          <Route path="/" element={<Home />} exact={true} />
         </Routes>
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
