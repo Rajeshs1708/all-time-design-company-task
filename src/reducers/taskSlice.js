@@ -8,15 +8,20 @@ const taskSlice = createSlice({
   name: "taskSlice",
   initialState,
   reducers: {
-    addTaskToList: (state, action) => {
-      const id = Math.random() * 100;
-      const task = { ...action.payload, id };
-      state.taskList.push(task);
+    getTask: (state, action) => {
+      state.taskList = action.payload.map((task) => {
+        return {
+          id: task.id,
+          task_date: task.task_date,
+          task_time: task.task_time,
+          is_completed: task.is_completed,
+          task_msg: task.task_msg,
+          time_zone: task.time_zone,
+        };
+      });
     },
-    removeTaskFromList: (state, action) => {
-      state.taskList = state.taskList.filter(
-        (task) => task.id !== action.payload.id
-      );
+    addTask: (state, action) => {
+      state.taskList.push(action.payload);
     },
     updateTaskInList: (state, action) => {
       state.taskList = state.taskList.map((task) =>
@@ -29,10 +34,6 @@ const taskSlice = createSlice({
   },
 });
 
-export const {
-  addTaskToList,
-  removeTaskFromList,
-  updateTaskInList,
-  setSelectedTask,
-} = taskSlice.actions;
+export const { getTask, addTask, updateTaskInList, setSelectedTask } =
+  taskSlice.actions;
 export default taskSlice.reducer;
