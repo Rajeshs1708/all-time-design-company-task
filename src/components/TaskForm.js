@@ -8,21 +8,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import CreateUser from "./CreateUser";
 import TaskList from "./TaskList";
-import UpdateUser from "./UpdateUser";
-import { Link } from "react-router-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function Home() {
+function TaskForm() {
   const [userName, setUserName] = useState([]);
-  const [toggle, setToggle] = useState(false);
   const [createFormToggle, setCreateFormToggle] = useState(false);
 
   const { taskList, selectedTask } = useSelector((state) => state.tasks);
   const dispatch = useDispatch();
 
-  const toggleForm = (e) => {
-    setToggle(e);
-  };
   const loginUser = () => {
     try {
       axios
@@ -34,7 +27,6 @@ function Home() {
           localStorage.setItem("token", res.data.results.token);
           localStorage.setItem("company_id", res.data.results.company_id);
           localStorage.setItem("user_id", res.data.results.user_id);
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     } catch (err) {
@@ -71,41 +63,47 @@ function Home() {
     <>
       <div className="container">
         <div className="row">
-          <div className="col-lg-6 col-md-6">
+          <div className="col">
             <div
-              className="d-flex justify-content-between"
-              style={{ border: "1px solid lightgray", padding: "20px" }}
+              className="d-flex justify-content-between align-items-center"
+              style={{ border: "1px solid lightgray", paddingLeft: "10px" }}
             >
-              <h3 className="">
+              <div className="">
                 TASKS
-                <span style={{ color: "darkgray", paddingLeft: "20px" }}>
+                <span style={{ color: "darkgray", paddingLeft: "10px" }}>
                   {taskList.length}
                 </span>
-              </h3>
-              <p onClick={() => setCreateFormToggle((e) => !e)}>
-                <a style={{ fontSize: "20px", cursor: "pointer" }}>+</a>
-              </p>
+              </div>
+              <div
+                onClick={() => setCreateFormToggle((e) => !e)}
+                style={{
+                  width: "50px",
+                  textAlign: "center",
+                  fontSize: "20px",
+                  cursor: "pointer",
+                  borderLeft: "1px solid lightgray",
+                  padding: "5px 0px",
+                  color: "gray",
+                }}
+              >
+                +
+              </div>
             </div>
           </div>
         </div>
+
         <div
           className="row"
           style={{ display: createFormToggle ? "block" : "none" }}
         >
-          <div className="col-lg-6 col-md-6">
+          <div className="col">
             <CreateUser userName={userName} />
           </div>
         </div>
 
-        <div className="row" style={{ display: toggle ? "block" : "none" }}>
-          <div className="col-lg-6 col-md-6">
-            <UpdateUser userName={userName} />
-          </div>
-        </div>
-
         <div className="row">
-          <div className="col-lg-6 col-md-6">
-            <TaskList toggleForm={toggleForm} />
+          <div className="col">
+            <TaskList />
           </div>
         </div>
       </div>
@@ -113,4 +111,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TaskForm;

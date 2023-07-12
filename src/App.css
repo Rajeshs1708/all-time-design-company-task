@@ -1,5 +1,55 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+}
+.left_bar {
+  height: 100vh;
+  width: 20vw;
+  background-color: rgb(12, 10, 73);
+  position: fixed;
+  z-index: 0;
+}
+.right_bar {
+  width: 80vw;
+  height: auto;
+  top: 0px;
+  left: 260px;
+  position: absolute;
+}
+.empty_box {
+  height: 50px;
+  border-bottom: 1px solid lightgray;
+}
+.content_box {
+  padding: 20px;
+}
+.content_box h1 {
+  color: rgb(12, 10, 73);
+  font-size: 25px;
+}
+.content_box p {
+  color: blue;
+}
+.content_box i {
+  color: gray;
+}
+
+.right_bar_bottom {
+  padding: 10px;
+  width: 400px;
+  height: auto;
+}
+.datepicker {
+  width: 100px;
+  border: none;
+  outline: none;
+  padding-left: 5px;
 }
